@@ -64,7 +64,7 @@ func homeBody(v viewdata.HomeView) templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<main class=\"mx-auto max-w-5xl px-6 py-10\"><div class=\"flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between\"><div><h1 class=\"text-3xl font-semibold tracking-tight text-slate-900\">Google Calendar Analyzer</h1><p class=\"mt-1 text-sm text-slate-600\">Query your Google Calendar events and export to CSV.</p></div><div class=\"flex flex-wrap items-center gap-3\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"flex min-h-screen flex-col\"><main class=\"mx-auto flex w-full max-w-5xl flex-1 flex-col px-6 py-10\"><div class=\"flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between\"><div><h1 class=\"text-3xl font-semibold tracking-tight text-slate-900\">Google Calendar Analyzer</h1><p class=\"mt-1 text-sm text-slate-600\">Query your Google Calendar events and export to CSV.</p></div><div class=\"flex flex-wrap items-center gap-3\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -76,7 +76,7 @@ func homeBody(v viewdata.HomeView) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(v.Email)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/home.templ`, Line: 22, Col: 51}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/home.templ`, Line: 23, Col: 51}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -152,7 +152,7 @@ func homeBody(v viewdata.HomeView) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(v.DefaultStart)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/home.templ`, Line: 68, Col: 71}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/home.templ`, Line: 69, Col: 71}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
@@ -165,7 +165,7 @@ func homeBody(v viewdata.HomeView) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(v.DefaultEnd)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/home.templ`, Line: 72, Col: 65}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/home.templ`, Line: 73, Col: 65}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -176,7 +176,7 @@ func homeBody(v viewdata.HomeView) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "<footer class=\"mt-16 border-t border-slate-200 pt-8 text-center text-xs text-slate-500\"><a href=\"/privacy\" class=\"text-slate-600 hover:text-slate-900 hover:underline\">Privacy Policy</a> <span class=\"mx-2 text-slate-300\" aria-hidden=\"true\">·</span> <a href=\"/terms\" class=\"text-slate-600 hover:text-slate-900 hover:underline\">Terms of Service</a></footer></main>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "<footer class=\"mt-auto border-t border-slate-200 pt-8 text-center text-xs text-slate-500\"><a href=\"/privacy\" class=\"text-slate-600 hover:text-slate-900 hover:underline\">Privacy Policy</a> <span class=\"mx-2 text-slate-300\" aria-hidden=\"true\">·</span> <a href=\"/terms\" class=\"text-slate-600 hover:text-slate-900 hover:underline\">Terms of Service</a></footer></main></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
