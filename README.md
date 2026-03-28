@@ -14,7 +14,7 @@ Web app to sign in with Google, pick calendars, query events in a time range, vi
 1. In [Google Cloud Console](https://console.cloud.google.com/), enable **Google Calendar API** for your project.
 2. Create **OAuth client ID** credentials (type *Web application* is typical for production behind HTTPS).
 3. Add an **Authorized redirect URI** exactly equal to your app’s callback URL, for example:
-   - Local: `http://127.0.0.1:8080/auth/google/callback`
+   - Local: `http://localhost:8080/auth/google/callback`
    - Production: `https://your.domain/auth/google/callback`
 4. Copy the client ID and client secret into your environment (see below). The same redirect URI must appear in `.env` as `GOOGLE_REDIRECT_URL` and in the Google client configuration.
 
