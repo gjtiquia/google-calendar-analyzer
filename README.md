@@ -34,6 +34,11 @@ Optional: `SESSION_COOKIE_NAME`, `SESSION_MAX_AGE_SECONDS`, `MAX_QUERY_RANGE_DAY
 
 On startup, the binary loads a **`.env` file in the current working directory** (via `godotenv`) if it exists, then reads `os.Getenv`. Run from the repo root so `.env` is found, or export variables yourself / use a process manager in production.
 
+```bash
+# install dependencies
+npm install
+```
+
 ## Run locally
 
 From the repository root (so `assets/` is served correctly):
@@ -44,7 +49,7 @@ From the repository root (so `assets/` is served correctly):
 
 This installs npm dependencies if needed, builds CSS, runs `templ generate`, and starts the server on `APP_ADDR` (default `:8080`).
 
-Open `http://127.0.0.1:8080` (use the same host you put in `GOOGLE_REDIRECT_URL`).
+Open `http://localhost:8080` (use the same host you put in `GOOGLE_REDIRECT_URL`).
 
 ## Build a release binary
 
