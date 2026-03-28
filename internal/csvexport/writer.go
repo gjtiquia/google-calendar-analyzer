@@ -2,22 +2,16 @@ package csvexport
 
 import (
 	"encoding/csv"
-	"fmt"
 	"io"
-	"time"
 
 	"github.com/gjtiquia/google-calendar-analyzer/internal/calendar"
 )
 
 var header = []string{
-	"Calendar",
-	"Event ID",
+	"Date",
 	"Title",
-	"Start (UTC)",
-	"End (UTC)",
-	"All Day",
-	"Status",
-	"Event URL",
+	"Duration (hrs)",
+	"Link",
 }
 
 // WriteEvents writes RFC4180 CSV with UTF-8 BOM for spreadsheet compatibility.
@@ -31,18 +25,10 @@ func WriteEvents(w io.Writer, events []calendar.Event) error {
 		return err
 	}
 	for _, e := range events {
-		cal := e.CalendarName
-		if cal == "" {
-			cal = e.CalendarID
-		}
 		row := []string{
-			cal,
-			e.ID,
+			calendar.FormatEventDate(e),
 			e.Summary,
-			formatTime(e.StartTime, e.AllDay),
-			formatTime(e.EndTime, e.AllDay),
-			fmt.Sprintf("%t", e.AllDay),
-			e.Status,
+			calendar.FormatDurationHours(e),
 			e.HTMLLink,
 		}
 		if err := cw.Write(row); err != nil {
@@ -51,11 +37,4 @@ func WriteEvents(w io.Writer, events []calendar.Event) error {
 	}
 	cw.Flush()
 	return cw.Error()
-}
-
-func formatTime(t time.Time, allDay bool) string {
-	if allDay {
-		return t.UTC().Format("2006-01-02")
-	}
-	return t.UTC().Format(time.RFC3339)
 }

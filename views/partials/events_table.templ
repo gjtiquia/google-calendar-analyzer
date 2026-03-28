@@ -16,9 +16,9 @@ templ EventsTable(events []calendar.Event) {
 			<tbody class="divide-y divide-slate-100">
 				for _, e := range events {
 					<tr class="hover:bg-slate-50">
-						<td class="whitespace-nowrap px-4 py-2 font-mono text-xs text-slate-700">{ FormatEventDate(e) }</td>
+						<td class="whitespace-nowrap px-4 py-2 font-mono text-xs text-slate-700">{ calendar.FormatEventDate(e) }</td>
 						<td class="px-4 py-2 text-slate-900">{ e.Summary }</td>
-						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ FormatDurationHours(e) }</td>
+						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ calendar.FormatDurationHours(e) }</td>
 						<td class="px-4 py-2">
 							if e.HTMLLink != "" {
 								<a href={ templ.SafeURL(e.HTMLLink) } class="text-blue-600 underline" target="_blank" rel="noopener noreferrer">Open</a>

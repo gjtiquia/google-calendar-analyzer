@@ -40,10 +40,16 @@ func TestWriteEvents_headerAndEscaping(t *testing.T) {
 	if len(rows) != 2 {
 		t.Fatalf("rows: %v", rows)
 	}
-	if rows[0][0] != "Calendar" || rows[1][0] != "My Cal" {
+	if rows[0][0] != "Date" || rows[1][0] != "2026-03-01" {
 		t.Fatalf("header/row: %v", rows)
 	}
-	if rows[1][2] != `Title, with "quotes"` {
-		t.Fatalf("field: %q", rows[1][2])
+	if rows[1][1] != `Title, with "quotes"` {
+		t.Fatalf("field: %q", rows[1][1])
+	}
+	if rows[1][2] != "1.00" {
+		t.Fatalf("duration: %q", rows[1][2])
+	}
+	if rows[1][3] != "https://example.com/e" {
+		t.Fatalf("link: %q", rows[1][3])
 	}
 }
