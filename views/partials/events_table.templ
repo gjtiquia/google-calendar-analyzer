@@ -7,6 +7,7 @@ templ EventsTable(events []calendar.Event) {
 		<table class="min-w-full divide-y divide-slate-200 text-left text-sm">
 			<thead class="bg-slate-100 text-xs font-semibold uppercase tracking-wide text-slate-700">
 				<tr>
+					<th class="px-4 py-3">Date</th>
 					<th class="px-4 py-3">Title</th>
 					<th class="px-4 py-3">Duration (hrs)</th>
 					<th class="px-4 py-3">Link</th>
@@ -15,6 +16,7 @@ templ EventsTable(events []calendar.Event) {
 			<tbody class="divide-y divide-slate-100">
 				for _, e := range events {
 					<tr class="hover:bg-slate-50">
+						<td class="whitespace-nowrap px-4 py-2 font-mono text-xs text-slate-700">{ FormatEventDate(e) }</td>
 						<td class="px-4 py-2 text-slate-900">{ e.Summary }</td>
 						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ FormatDurationHours(e) }</td>
 						<td class="px-4 py-2">
