@@ -28,6 +28,20 @@ func NewHandler(oauthConfigured bool, sess *session.Manager) *Handler {
 	}
 }
 
+func (h *Handler) PrivacyPolicy(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	if err := pages.PrivacyPolicy().Render(ctx, w); err != nil {
+		http.Error(w, "failed to render privacy policy", http.StatusInternalServerError)
+	}
+}
+
+func (h *Handler) TermsOfService(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	if err := pages.TermsOfService().Render(ctx, w); err != nil {
+		http.Error(w, "failed to render terms of service", http.StatusInternalServerError)
+	}
+}
+
 func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	p := session.PayloadFromContext(ctx)

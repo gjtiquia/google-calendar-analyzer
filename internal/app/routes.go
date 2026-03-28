@@ -30,6 +30,8 @@ func (s *Server) Routes() http.Handler {
 	mux.Handle("GET /assets/", http.StripPrefix("/assets/", assets))
 
 	mux.HandleFunc("GET /", webH.Home)
+	mux.HandleFunc("GET /privacy", webH.PrivacyPolicy)
+	mux.HandleFunc("GET /terms", webH.TermsOfService)
 	mux.HandleFunc("GET /healthz", webH.Healthz)
 
 	mux.HandleFunc("GET /auth/google/login", authH.Login)

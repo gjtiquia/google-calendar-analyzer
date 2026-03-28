@@ -1,0 +1,150 @@
+package pages
+
+import "github.com/gjtiquia/google-calendar-analyzer/views"
+
+templ PrivacyPolicy() {
+	@views.Layout("Privacy Policy — Google Calendar Analyzer", privacyBody())
+}
+
+templ privacyBody() {
+	<main class="mx-auto max-w-3xl px-6 py-10">
+		<p class="text-sm text-slate-600">
+			<a href="/" class="text-blue-700 hover:underline">← Back to app</a>
+		</p>
+		<h1 class="mt-6 text-3xl font-semibold tracking-tight text-slate-900">Privacy Policy</h1>
+		<p class="mt-2 text-sm text-slate-600">Last updated: March 28, 2026</p>
+		<div class="mt-8 space-y-4 text-sm leading-relaxed text-slate-800">
+			<p>
+				This Privacy Policy describes how the web application <strong>Google Calendar Analyzer</strong> (the “Service”) handles information when you use it. The Service lets you sign in with Google, read calendar data you choose, display events in your browser, and download results as a CSV file.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Who provides the Service</h2>
+			<p>
+				The Service may be run by different people or organizations on their own servers (“Operator”). The Operator who runs the instance you use is responsible for how that deployment is operated. If you need to contact someone about a specific deployment, use the contact information shown in the Google OAuth consent screen for that app, or the site or documentation where you obtained access.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Information we access via Google</h2>
+			<p>When you choose to sign in with Google, the Service requests permission to:</p>
+			<ul class="mt-3 list-disc space-y-2 pl-6">
+				<li>
+					<strong>View your email address and basic profile</strong> (<code class="rounded bg-slate-100 px-1 py-0.5 text-xs">userinfo.email</code>, <code class="rounded bg-slate-100 px-1 py-0.5 text-xs">userinfo.profile</code>) so we can identify your session and display your account in the app.
+				</li>
+				<li>
+					<strong>See and download your calendar events you select</strong> (<code class="rounded bg-slate-100 px-1 py-0.5 text-xs">calendar.readonly</code>) so we can list your calendars, query events in a date range you specify, show them in the interface, and produce a CSV export. We do not use this permission to create, change, or delete events.
+				</li>
+			</ul>
+			<p class="mt-4">
+				Data from Google is retrieved over HTTPS using Google’s APIs. We use it only to provide the features you request in the Service (display and export). We do not sell your personal information.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">How we store and process data</h2>
+			<ul class="mt-3 list-disc space-y-2 pl-6">
+				<li>
+					<strong>Session cookie.</strong> After you sign in, the Service stores a signed and encrypted session in an HTTP-only cookie in your browser. That session includes your Google user identifier, email address, and a short-lived OAuth access token so we can call Google Calendar on your behalf until the token expires. Refresh tokens are not stored by this application.
+				</li>
+				<li>
+					<strong>No application database.</strong> This application does not persist your calendar events or queries in a database as part of its design; event data is processed to respond to your current request (for example, to render the page or the CSV download).
+				</li>
+				<li>
+					<strong>Server logs.</strong> The Operator’s web server or hosting environment may create standard access or error logs (for example, IP address, timestamps, URLs). That practice depends on the Operator’s configuration and is outside this application’s source code.
+				</li>
+			</ul>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Cookies</h2>
+			<p>
+				We use cookies that are necessary for sign-in and security: a session cookie for your logged-in state and a short-lived cookie used during the OAuth redirect flow. You can remove cookies through your browser settings; doing so may sign you out or require you to sign in again.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Your choices</h2>
+			<ul class="mt-3 list-disc space-y-2 pl-6">
+				<li>You can sign out of the Service using the sign-out control; that clears the session cookie from your browser for this app.</li>
+				<li>You can revoke the Service’s access to your Google account at any time in your <a href="https://myaccount.google.com/permissions" class="text-blue-700 hover:underline" rel="noopener noreferrer">Google Account security settings</a> under “Third-party apps with account access.”</li>
+			</ul>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Third-party services</h2>
+			<p>
+				The Service relies on Google’s OAuth and Google Calendar APIs. Google’s use of information received from the Service is described in the
+				<a href="https://developers.google.com/terms/api-services-user-data-policy" class="text-blue-700 hover:underline" rel="noopener noreferrer">Google API Services User Data Policy</a>, including the Limited Use requirements. We also encourage you to review Google’s privacy policy applicable to your Google Account.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Children</h2>
+			<p>
+				The Service is not directed at children under 13 (or the age required by your jurisdiction). Do not use the Service if you are not old enough to consent to processing of your data where you live.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Changes</h2>
+			<p>
+				We may update this Privacy Policy from time to time. The “Last updated” date at the top will change when we do. Continued use of the Service after changes means you accept the updated policy.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Contact</h2>
+			<p>
+				For questions about privacy as they relate to a particular deployment, contact the Operator using the details from that deployment’s OAuth consent screen or hosting documentation.
+			</p>
+		</div>
+		<p class="mt-10 text-sm text-slate-600">
+			<a href="/terms" class="text-blue-700 hover:underline">Terms of Service</a>
+		</p>
+	</main>
+}
+
+templ TermsOfService() {
+	@views.Layout("Terms of Service — Google Calendar Analyzer", termsBody())
+}
+
+templ termsBody() {
+	<main class="mx-auto max-w-3xl px-6 py-10">
+		<p class="text-sm text-slate-600">
+			<a href="/" class="text-blue-700 hover:underline">← Back to app</a>
+		</p>
+		<h1 class="mt-6 text-3xl font-semibold tracking-tight text-slate-900">Terms of Service</h1>
+		<p class="mt-2 text-sm text-slate-600">Last updated: March 28, 2026</p>
+		<div class="mt-8 space-y-4 text-sm leading-relaxed text-slate-800">
+			<p>
+				These Terms of Service (“Terms”) govern your use of the web application <strong>Google Calendar Analyzer</strong> (the “Service”). By accessing or using the Service, you agree to these Terms.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">The Service</h2>
+			<p>
+				The Service allows you to authenticate with Google, select calendars, query events within a time range, view results in your browser, and download a CSV export. Features depend on the deployment being configured with valid Google OAuth credentials and the Google Calendar API enabled for that project.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Eligibility and your account</h2>
+			<p>
+				You must have permission to use the Google account you connect. You are responsible for activity that occurs under your session. You must comply with Google’s terms and policies that apply to your use of Google services.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Acceptable use</h2>
+			<p>You agree not to misuse the Service. For example, you must not:</p>
+			<ul class="mt-3 list-disc space-y-2 pl-6">
+				<li>Use the Service in violation of law or third-party rights.</li>
+				<li>Attempt to gain unauthorized access to systems, data, or accounts.</li>
+				<li>Interfere with or disrupt the Service or other users.</li>
+				<li>Reverse engineer or attempt to extract source code except where laws prohibit that restriction.</li>
+			</ul>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Disclaimer</h2>
+			<p>
+				THE SERVICE IS PROVIDED “AS IS” AND “AS AVAILABLE,” WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. THE SERVICE RELIES ON GOOGLE’S APIS AND YOUR NETWORK; WE DO NOT WARRANT UNINTERRUPTED OR ERROR-FREE OPERATION OR THAT RESULTS WILL BE ACCURATE OR COMPLETE.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Limitation of liability</h2>
+			<p>
+				TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE OPERATOR OF THE INSTANCE YOU USE (AND CONTRIBUTORS TO THE SOFTWARE, WHERE APPLICABLE) WILL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, DATA, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM YOUR USE OF OR INABILITY TO USE THE SERVICE. OUR TOTAL LIABILITY FOR ANY CLAIM ARISING OUT OF THESE TERMS OR THE SERVICE IS LIMITED TO THE GREATER OF (A) THE AMOUNTS YOU PAID TO USE THIS SERVICE IN THE TWELVE MONTHS BEFORE THE CLAIM (IF ANY), OR (B) ZERO DOLLARS IF THE SERVICE IS PROVIDED WITHOUT CHARGE.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Indemnity</h2>
+			<p>
+				You agree to defend, indemnify, and hold harmless the Operator and its affiliates, contributors, and personnel from any claims, damages, losses, or expenses (including reasonable attorneys’ fees) arising from your use of the Service, your content, or your violation of these Terms.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Termination</h2>
+			<p>
+				You may stop using the Service at any time. The Operator may suspend or end access to a deployment for operational, legal, or security reasons. Provisions that by their nature should survive will survive termination.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Changes to these Terms</h2>
+			<p>
+				We may modify these Terms. We will indicate updates by changing the “Last updated” date above. If you continue to use the Service after changes take effect, you accept the revised Terms.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Governing law</h2>
+			<p>
+				These Terms are governed by the laws applicable where the Operator operates the deployment you use, excluding conflict-of-law rules. Courts in those jurisdictions may have exclusive jurisdiction over disputes, unless mandatory consumer protections in your country say otherwise.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Open source</h2>
+			<p>
+				The Service may be distributed as open-source software. Your use of the software is also subject to the license file included with the source repository, in addition to these Terms for the running Service.
+			</p>
+			<h2 class="mt-8 text-lg font-semibold text-slate-900">Contact</h2>
+			<p>
+				For questions about these Terms for a particular deployment, contact the Operator using the information from that deployment’s Google OAuth consent screen or hosting documentation.
+			</p>
+		</div>
+		<p class="mt-10 text-sm text-slate-600">
+			<a href="/privacy" class="text-blue-700 hover:underline">Privacy Policy</a>
+		</p>
+	</main>
+}

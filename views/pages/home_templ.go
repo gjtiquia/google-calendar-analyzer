@@ -176,7 +176,7 @@ func homeBody(v viewdata.HomeView) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "</main>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "<footer class=\"mt-16 border-t border-slate-200 pt-8 text-center text-xs text-slate-500\"><a href=\"/privacy\" class=\"text-slate-600 hover:text-slate-900 hover:underline\">Privacy Policy</a> <span class=\"mx-2 text-slate-300\" aria-hidden=\"true\">·</span> <a href=\"/terms\" class=\"text-slate-600 hover:text-slate-900 hover:underline\">Terms of Service</a></footer></main>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
