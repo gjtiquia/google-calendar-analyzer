@@ -22,7 +22,7 @@ func (s *Server) Routes() http.Handler {
 		s.cfg.GoogleRedirectURL,
 		sm,
 	)
-	webH := web.NewHandler(s.cfg.MaxQueryRangeDays, s.cfg.OAuthConfigured(), sm)
+	webH := web.NewHandler(s.cfg.OAuthConfigured(), sm)
 
 	mux := http.NewServeMux()
 

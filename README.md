@@ -30,7 +30,7 @@ Copy [.env.example](.env.example) to `.env` and fill in values. Important variab
 | `GOOGLE_REDIRECT_URL` | Full callback URL; must match Google Console exactly. |
 | `APP_ENV` | `development` or `production` (`production` sets `Secure` on cookies). |
 
-Optional: `SESSION_COOKIE_NAME`, `SESSION_MAX_AGE_SECONDS`, `MAX_QUERY_RANGE_DAYS`.
+Optional: `SESSION_COOKIE_NAME`, `SESSION_MAX_AGE_SECONDS`.
 
 On startup, the binary loads a **`.env` file in the current working directory** (via `godotenv`) if it exists, then reads `os.Getenv`. Run from the repo root so `.env` is found, or export variables yourself / use a process manager in production.
 

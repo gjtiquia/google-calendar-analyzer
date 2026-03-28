@@ -34,7 +34,7 @@ The MVP described in the implementation plan was built: Google OAuth sign-in, st
 
 ## Configuration
 
-Environment variables match the plan’s contract, including `APP_BASE_URL`, `SESSION_SECRET`, Google OAuth trio, and optional `SESSION_COOKIE_NAME`, `SESSION_MAX_AGE_SECONDS`, `MAX_QUERY_RANGE_DAYS`. See `.env.example` and README.
+Environment variables match the plan’s contract, including `APP_BASE_URL`, `SESSION_SECRET`, Google OAuth trio, and optional `SESSION_COOKIE_NAME`, `SESSION_MAX_AGE_SECONDS`. See `.env.example` and README.
 
 ## Behavior notes
 

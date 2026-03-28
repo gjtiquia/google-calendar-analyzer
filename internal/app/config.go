@@ -17,9 +17,8 @@ type Config struct {
 	GoogleClientID     string
 	GoogleClientSecret string
 	GoogleRedirectURL  string
-	SessionCookieName  string
-	SessionMaxAge      int
-	MaxQueryRangeDays  int
+	SessionCookieName string
+	SessionMaxAge     int
 }
 
 func LoadConfigFromEnv() (Config, error) {
@@ -61,15 +60,6 @@ func LoadConfigFromEnv() (Config, error) {
 		maxAge = n
 	}
 
-	maxRange := 31
-	if v := os.Getenv("MAX_QUERY_RANGE_DAYS"); v != "" {
-		n, err := strconv.Atoi(v)
-		if err != nil || n <= 0 {
-			return Config{}, fmt.Errorf("MAX_QUERY_RANGE_DAYS: invalid value %q", v)
-		}
-		maxRange = n
-	}
-
 	return Config{
 		Env:                env,
 		Addr:               addr,
@@ -78,9 +68,8 @@ func LoadConfigFromEnv() (Config, error) {
 		GoogleClientID:     clientID,
 		GoogleClientSecret: clientSecret,
 		GoogleRedirectURL:  redirectURL,
-		SessionCookieName:  cookieName,
-		SessionMaxAge:      maxAge,
-		MaxQueryRangeDays:  maxRange,
+		SessionCookieName: cookieName,
+		SessionMaxAge:     maxAge,
 	}, nil
 }
 

@@ -2,7 +2,6 @@ package calendar
 
 import (
 	"net/url"
-	"strings"
 	"testing"
 	"time"
 )
@@ -16,7 +15,7 @@ func TestParseQuery_ok(t *testing.T) {
 	v.Set("q", "ignored")
 	v.Set("match_mode", "ignored")
 
-	q, err := ParseQuery(v, 31)
+	q, err := ParseQuery(v)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -33,23 +32,9 @@ func TestParseQuery_startNotBeforeEnd(t *testing.T) {
 	v.Set("start", "2026-01-02T00:00:00Z")
 	v.Set("end", "2026-01-01T00:00:00Z")
 	v.Set("calendar_ids", "x")
-	_, err := ParseQuery(v, 31)
+	_, err := ParseQuery(v)
 	if err == nil {
 		t.Fatal("expected error")
-	}
-}
-
-func TestParseQuery_rangeTooLarge(t *testing.T) {
-	v := url.Values{}
-	v.Set("start", "2026-01-01T00:00:00Z")
-	v.Set("end", "2026-03-01T00:00:00Z")
-	v.Set("calendar_ids", "x")
-	_, err := ParseQuery(v, 31)
-	if err == nil {
-		t.Fatal("expected error")
-	}
-	if !strings.Contains(err.Error(), "31") {
-		t.Fatalf("unexpected: %v", err)
 	}
 }
 
@@ -57,7 +42,7 @@ func TestParseQuery_noCalendars(t *testing.T) {
 	v := url.Values{}
 	v.Set("start", "2026-01-01T00:00:00Z")
 	v.Set("end", "2026-01-02T00:00:00Z")
-	_, err := ParseQuery(v, 31)
+	_, err := ParseQuery(v)
 	if err == nil {
 		t.Fatal("expected error")
 	}

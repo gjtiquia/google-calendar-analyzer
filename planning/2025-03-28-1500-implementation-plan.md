@@ -114,7 +114,6 @@ Environment variables:
 Optional:
 - `SESSION_COOKIE_NAME` (default: `gca_session`)
 - `SESSION_MAX_AGE_SECONDS` (default: `3600`)
-- `MAX_QUERY_RANGE_DAYS` (default: `31`)
 
 ## Session Payload
 
@@ -156,7 +155,6 @@ Input parameters:
 
 Validation:
 - `start < end`
-- Range <= `MAX_QUERY_RANGE_DAYS`
 - At least one calendar selected
 - Reject malformed dates with a clear error message
 

@@ -16,7 +16,7 @@ type Query struct {
 
 // ParseQuery parses start, end, and calendar IDs from form values (POST body or GET query).
 // Optional keys q and match_mode are ignored for MVP.
-func ParseQuery(values url.Values, maxRangeDays int) (Query, error) {
+func ParseQuery(values url.Values) (Query, error) {
 	startRaw := strings.TrimSpace(values.Get("start"))
 	endRaw := strings.TrimSpace(values.Get("end"))
 	if startRaw == "" || endRaw == "" {
@@ -32,10 +32,6 @@ func ParseQuery(values url.Values, maxRangeDays int) (Query, error) {
 	}
 	if !start.Before(end) {
 		return Query{}, errors.New("start must be before end")
-	}
-	maxDur := time.Duration(maxRangeDays) * 24 * time.Hour
-	if end.Sub(start) > maxDur {
-		return Query{}, fmt.Errorf("range must be at most %d days", maxRangeDays)
 	}
 
 	var ids []string

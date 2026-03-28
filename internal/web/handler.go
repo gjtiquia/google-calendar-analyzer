@@ -17,16 +17,14 @@ import (
 )
 
 type Handler struct {
-	maxQueryRangeDays int
-	oauthConfigured   bool
-	sess              *session.Manager
+	oauthConfigured bool
+	sess            *session.Manager
 }
 
-func NewHandler(maxQueryRangeDays int, oauthConfigured bool, sess *session.Manager) *Handler {
+func NewHandler(oauthConfigured bool, sess *session.Manager) *Handler {
 	return &Handler{
-		maxQueryRangeDays: maxQueryRangeDays,
-		oauthConfigured:   oauthConfigured,
-		sess:              sess,
+		oauthConfigured: oauthConfigured,
+		sess:            sess,
 	}
 }
 
@@ -128,7 +126,7 @@ func (h *Handler) EventsQuery(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	q, err := calendar.ParseQuery(r.Form, h.maxQueryRangeDays)
+	q, err := calendar.ParseQuery(r.Form)
 	if err != nil {
 		h.writeEventsFragment(ctx, w, partials.Flash(err.Error()))
 		return
@@ -182,7 +180,7 @@ func (h *Handler) ExportCSV(w http.ResponseWriter, r *http.Request) {
 	}
 
 	values := r.URL.Query()
-	q, err := calendar.ParseQuery(values, h.maxQueryRangeDays)
+	q, err := calendar.ParseQuery(values)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
