@@ -58,11 +58,11 @@ templ homeBody(v viewdata.HomeView) {
 				<div class="grid gap-4 sm:grid-cols-2">
 					<div>
 						<label for="start" class="block text-sm font-medium text-slate-800">Start (UTC)</label>
-						<input id="start" type="datetime-local" name="start" value={ v.DefaultStart } required class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm"/>
+						<input id="start" type="date" name="start" value={ v.DefaultStart } required class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm"/>
 					</div>
 					<div>
 						<label for="end" class="block text-sm font-medium text-slate-800">End (UTC)</label>
-						<input id="end" type="datetime-local" name="end" value={ v.DefaultEnd } required class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm"/>
+						<input id="end" type="date" name="end" value={ v.DefaultEnd } required class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm"/>
 					</div>
 				</div>
 				<div class="flex flex-wrap gap-3">

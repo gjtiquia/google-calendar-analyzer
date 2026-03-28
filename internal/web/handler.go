@@ -37,8 +37,8 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 	view := viewdata.HomeView{
 		OAuthConfigured: h.oauthConfigured,
 		LoggedIn:        p != nil,
-		DefaultStart:    time.Now().UTC().Add(-24 * time.Hour).Format("2006-01-02T15:04"),
-		DefaultEnd:      time.Now().UTC().Add(7 * 24 * time.Hour).Format("2006-01-02T15:04"),
+		DefaultStart:    time.Now().UTC().Add(-24 * time.Hour).Format("2006-01-02"),
+		DefaultEnd:      time.Now().UTC().Add(7 * 24 * time.Hour).Format("2006-01-02"),
 	}
 	if p != nil {
 		view.Email = p.Email

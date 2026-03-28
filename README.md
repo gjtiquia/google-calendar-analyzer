@@ -66,6 +66,8 @@ Output: `bin/google-calendar-analyzer`. Run it with the same working directory a
 3. Use [deploy/google-calendar-analyzer.service](deploy/google-calendar-analyzer.service) as a template for systemd: set `User`/`Group`, paths, and `EnvironmentFile`.
 4. Put TLS in front with a reverse proxy; see [deploy/caddy.example.conf](deploy/caddy.example.conf). Set `APP_BASE_URL` and `GOOGLE_REDIRECT_URL` to your public HTTPS URL and register that redirect URI in Google Cloud.
 
+(GJ: or git clone on VPS and run the `dev.sh` script, perf-wise no difference between `go run` and run binary)
+
 ## Health check
 
 `GET /healthz` returns `200` with body `ok`.
