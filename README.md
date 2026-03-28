@@ -51,22 +51,32 @@ This installs npm dependencies if needed, builds CSS, runs `templ generate`, and
 
 Open `http://localhost:8080` (use the same host you put in `GOOGLE_REDIRECT_URL`).
 
-## Build a release binary
+## Build CSS / templ (when you change styles or templates)
 
 ```bash
-./scripts/build.sh
+npm run css:build
+go run github.com/a-h/templ/cmd/templ@latest generate
 ```
 
-Output: `bin/google-calendar-analyzer`. Run it with the same working directory as the repo (or copy `assets/` and `views` are not needed at runtime except generated `_templ.go` is compiled in—**assets** must be present next to the binary or adjust paths). The server serves static files from `./assets` relative to the process working directory, so run from the project root or set `WorkingDirectory` in systemd to the install path that contains `assets/`.
+## Run on a server (git pull + go run)
+
+From the repo root (so `./assets` is found and `git rev-parse` resolves for asset cache busting):
+
+```bash
+git pull
+npm ci && npm run css:build   # when frontend or templates changed
+go run github.com/a-h/templ/cmd/templ@latest generate
+go run ./cmd/web
+```
+
+Or build a binary: `go build -o bin/google-calendar-analyzer ./cmd/web` and run it with the same working directory as the clone.
 
 ## Deploy on a VPS (overview)
 
-1. Build the binary and install under e.g. `/opt/google-calendar-analyzer` together with `assets/`.
+1. Clone the repo on the server and keep `assets/` beside the process working directory.
 2. Create `/etc/google-calendar-analyzer.env` with the same variables as `.env.example` (production values).
 3. Use [deploy/google-calendar-analyzer.service](deploy/google-calendar-analyzer.service) as a template for systemd: set `User`/`Group`, paths, and `EnvironmentFile`.
 4. Put TLS in front with a reverse proxy; see [deploy/caddy.example.conf](deploy/caddy.example.conf). Set `APP_BASE_URL` and `GOOGLE_REDIRECT_URL` to your public HTTPS URL and register that redirect URI in Google Cloud.
-
-(GJ: or git clone on VPS and run the `dev.sh` script, perf-wise no difference between `go run` and run binary)
 
 ## Health check
 
