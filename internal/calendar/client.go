@@ -2,12 +2,26 @@ package calendar
 
 import (
 	"context"
+	"strings"
 	"time"
 
 	"golang.org/x/oauth2"
 	calapi "google.golang.org/api/calendar/v3"
 	"google.golang.org/api/option"
 )
+
+// listEventTypes is the set of event types documented for events.list. Passing
+// these explicitly omits any other event types the API may return (for example
+// calendar "task" items that are not regular events).
+// See: https://developers.google.com/workspace/calendar/api/v3/reference/events/list
+var listEventTypes = []string{
+	"default",
+	"birthday",
+	"focusTime",
+	"fromGmail",
+	"outOfOffice",
+	"workingLocation",
+}
 
 func newService(ctx context.Context, accessToken string) (*calapi.Service, error) {
 	cli := oauth2.NewClient(ctx, oauth2.StaticTokenSource(&oauth2.Token{AccessToken: accessToken}))
@@ -68,7 +82,8 @@ func ListEventsForCalendars(ctx context.Context, accessToken string, calendarIDs
 				OrderBy("startTime").
 				TimeMin(timeMin).
 				TimeMax(timeMax).
-				MaxResults(2500)
+				MaxResults(2500).
+				EventTypes(listEventTypes...)
 			if search != "" {
 				call = call.Q(search)
 			}
@@ -81,6 +96,9 @@ func ListEventsForCalendars(ctx context.Context, accessToken string, calendarIDs
 			}
 			for _, e := range evs.Items {
 				if e == nil {
+					continue
+				}
+				if isExcludedNonEventItem(e) {
 					continue
 				}
 				ev, err := mapEvent(calID, e)
@@ -96,6 +114,22 @@ func ListEventsForCalendars(ctx context.Context, accessToken string, calendarIDs
 		}
 	}
 	return combined, nil
+}
+
+// isExcludedNonEventItem drops Google Calendar items that are not ordinary
+// meetings/events when the API still returns them (e.g. as eventType "task"
+// or with a Tasks source URL).
+func isExcludedNonEventItem(e *calapi.Event) bool {
+	if strings.EqualFold(e.EventType, "task") {
+		return true
+	}
+	if e.Source != nil {
+		u := strings.ToLower(e.Source.Url)
+		if strings.Contains(u, "tasks.google.com") {
+			return true
+		}
+	}
+	return false
 }
 
 func mapEvent(calID string, e *calapi.Event) (Event, error) {

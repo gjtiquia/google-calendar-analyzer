@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* htmx: show .htmx-indicator while the parent form has .htmx-request */
+@layer components {
+	.htmx-indicator {
+		@apply opacity-0 transition-opacity duration-200;
+	}
+	.htmx-request .htmx-indicator {
+		@apply opacity-100;
+	}
+}

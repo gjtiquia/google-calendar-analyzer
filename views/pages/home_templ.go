@@ -137,7 +137,7 @@ func homeBody(v viewdata.HomeView) templ.Component {
 			}
 		}
 		if v.LoggedIn && v.CalendarErr == "" && len(v.Calendars) > 0 {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<form id=\"query-form\" class=\"mt-8 space-y-6\" hx-post=\"/events/query\" hx-target=\"#events-result\" hx-swap=\"innerHTML\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<form id=\"query-form\" class=\"mt-8 space-y-6\" hx-post=\"/events/query\" hx-target=\"#events-result\" hx-swap=\"innerHTML\" hx-disabled-elt=\"#fetch-events-btn\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -152,7 +152,7 @@ func homeBody(v viewdata.HomeView) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(v.DefaultStart)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/home.templ`, Line: 61, Col: 71}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/home.templ`, Line: 68, Col: 71}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
@@ -165,13 +165,13 @@ func homeBody(v viewdata.HomeView) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(v.DefaultEnd)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/home.templ`, Line: 65, Col: 65}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/home.templ`, Line: 72, Col: 65}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "\" required class=\"mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm\"></div></div><div><label for=\"q\" class=\"block text-sm font-medium text-slate-800\">Search</label> <input id=\"q\" type=\"search\" name=\"q\" value=\"\" autocomplete=\"off\" placeholder=\"Optional — same as Google Calendar search\" class=\"mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm\"><p class=\"mt-1 text-xs text-slate-500\">Matches title, description, location, and people fields (Google Calendar API).</p></div><div class=\"flex flex-wrap gap-3\"><button type=\"submit\" class=\"rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow hover:bg-slate-800\">Fetch events</button> <button type=\"button\" id=\"export-csv-btn\" class=\"rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-800 shadow-sm hover:bg-slate-50\">Export CSV</button></div></form><div id=\"events-result\" class=\"mt-8 min-h-[4rem] rounded-lg border border-dashed border-slate-200 bg-slate-50/50 p-4 text-sm text-slate-500\">Results appear here after you fetch events.</div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "\" required class=\"mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm\"></div></div><div><label for=\"q\" class=\"block text-sm font-medium text-slate-800\">Search</label> <input id=\"q\" type=\"search\" name=\"q\" value=\"\" autocomplete=\"off\" placeholder=\"Optional — same as Google Calendar search\" class=\"mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm\"><p class=\"mt-1 text-xs text-slate-500\">Matches title, description, location, and people fields (Google Calendar API).</p></div><div class=\"flex flex-wrap items-center gap-3\"><button type=\"submit\" id=\"fetch-events-btn\" class=\"rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60\">Fetch events</button> <span class=\"htmx-indicator inline-flex items-center gap-2 text-sm text-slate-600\" aria-live=\"polite\"><svg class=\"h-4 w-4 animate-spin text-slate-500\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle class=\"opacity-25\" cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"4\"></circle> <path class=\"opacity-75\" fill=\"currentColor\" d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z\"></path></svg> Fetching…</span> <button type=\"button\" id=\"export-csv-btn\" class=\"rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-800 shadow-sm hover:bg-slate-50\">Export CSV</button></div></form><div id=\"events-result\" class=\"mt-8 min-h-[4rem] rounded-lg border border-dashed border-slate-200 bg-slate-50/50 p-4 text-sm text-slate-500\">Results appear here after you fetch events.</div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
