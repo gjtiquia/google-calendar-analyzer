@@ -1,35 +1,16 @@
 package partials
 
 import (
-	"time"
+	"fmt"
 
 	"github.com/gjtiquia/google-calendar-analyzer/internal/calendar"
 )
 
-func FormatStart(e calendar.Event) string {
-	if e.AllDay {
-		return e.StartTime.UTC().Format("2006-01-02")
+// FormatDurationHours returns the event length in hours (two decimal places).
+func FormatDurationHours(e calendar.Event) string {
+	h := e.EndTime.Sub(e.StartTime).Hours()
+	if h < 0 {
+		h = 0
 	}
-	return e.StartTime.UTC().Format(time.RFC3339)
-}
-
-func FormatEnd(e calendar.Event) string {
-	if e.AllDay {
-		return e.EndTime.UTC().Format("2006-01-02")
-	}
-	return e.EndTime.UTC().Format(time.RFC3339)
-}
-
-func CalendarLabel(e calendar.Event) string {
-	if e.CalendarName != "" {
-		return e.CalendarName
-	}
-	return e.CalendarID
-}
-
-func AllDayLabel(b bool) string {
-	if b {
-		return "Yes"
-	}
-	return "No"
+	return fmt.Sprintf("%.2f", h)
 }

@@ -7,24 +7,16 @@ templ EventsTable(events []calendar.Event) {
 		<table class="min-w-full divide-y divide-slate-200 text-left text-sm">
 			<thead class="bg-slate-100 text-xs font-semibold uppercase tracking-wide text-slate-700">
 				<tr>
-					<th class="px-4 py-3">Calendar</th>
 					<th class="px-4 py-3">Title</th>
-					<th class="px-4 py-3">Start (UTC)</th>
-					<th class="px-4 py-3">End (UTC)</th>
-					<th class="px-4 py-3">All day</th>
-					<th class="px-4 py-3">Status</th>
+					<th class="px-4 py-3">Duration (hrs)</th>
 					<th class="px-4 py-3">Link</th>
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-slate-100">
 				for _, e := range events {
 					<tr class="hover:bg-slate-50">
-						<td class="whitespace-nowrap px-4 py-2 text-slate-800">{ CalendarLabel(e) }</td>
 						<td class="px-4 py-2 text-slate-900">{ e.Summary }</td>
-						<td class="whitespace-nowrap px-4 py-2 font-mono text-xs text-slate-700">{ FormatStart(e) }</td>
-						<td class="whitespace-nowrap px-4 py-2 font-mono text-xs text-slate-700">{ FormatEnd(e) }</td>
-						<td class="px-4 py-2">{ AllDayLabel(e.AllDay) }</td>
-						<td class="px-4 py-2">{ e.Status }</td>
+						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ FormatDurationHours(e) }</td>
 						<td class="px-4 py-2">
 							if e.HTMLLink != "" {
 								<a href={ templ.SafeURL(e.HTMLLink) } class="text-blue-600 underline" target="_blank" rel="noopener noreferrer">Open</a>
