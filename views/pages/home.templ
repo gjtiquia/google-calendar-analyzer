@@ -1,19 +1,82 @@
 package pages
 
-templ Home() {
-	<!doctype html>
-	<html lang="en">
-		<head>
-			<meta charset="utf-8"/>
-			<meta name="viewport" content="width=device-width, initial-scale=1"/>
-			<title>Google Calendar Analyzer</title>
-			<link rel="stylesheet" href="/assets/dist/app.css"/>
-		</head>
-		<body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
-			<main class="mx-auto max-w-3xl px-6 py-10">
-				<h1 class="text-3xl font-semibold tracking-tight">Google Calendar Analyzer</h1>
-				<p class="mt-2 text-slate-600">Phase 1 scaffold is running.</p>
-			</main>
-		</body>
-	</html>
+import (
+	"github.com/gjtiquia/google-calendar-analyzer/internal/viewdata"
+	"github.com/gjtiquia/google-calendar-analyzer/views"
+	"github.com/gjtiquia/google-calendar-analyzer/views/partials"
+)
+
+templ Home(v viewdata.HomeView) {
+	@views.Layout("Google Calendar Analyzer", homeBody(v))
+}
+
+templ homeBody(v viewdata.HomeView) {
+	<main class="mx-auto max-w-5xl px-6 py-10">
+		<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+			<div>
+				<h1 class="text-3xl font-semibold tracking-tight text-slate-900">Google Calendar Analyzer</h1>
+				<p class="mt-1 text-sm text-slate-600">Query your Google Calendar events and export to CSV.</p>
+			</div>
+			<div class="flex flex-wrap items-center gap-3">
+				if v.LoggedIn {
+					<span class="text-sm text-slate-700">{ v.Email }</span>
+					<form method="post" action="/auth/logout" class="inline">
+						<button type="submit" class="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-800 shadow-sm hover:bg-slate-50">
+							Sign out
+						</button>
+					</form>
+				} else if v.OAuthConfigured {
+					<a href="/auth/google/login" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-blue-700">
+						Sign in with Google
+					</a>
+				}
+			</div>
+		</div>
+		if v.Flash != "" {
+			<div class="mt-6">
+				@partials.Flash(v.Flash)
+			</div>
+		}
+		if !v.OAuthConfigured {
+			<div class="mt-6 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950">
+				OAuth is not configured. Set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_REDIRECT_URL in the environment.
+			</div>
+		}
+		if v.LoggedIn && v.CalendarErr != "" {
+			<div class="mt-6">
+				@partials.Flash(v.CalendarErr)
+			</div>
+		}
+		if v.LoggedIn && v.CalendarErr == "" && len(v.Calendars) == 0 {
+			<div class="mt-6 rounded-md border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700">
+				No calendars were returned for this account.
+			</div>
+		}
+		if v.LoggedIn && v.CalendarErr == "" && len(v.Calendars) > 0 {
+			<form id="query-form" class="mt-8 space-y-6" hx-post="/events/query" hx-target="#events-result" hx-swap="innerHTML">
+				@partials.CalendarList(v.Calendars)
+				<div class="grid gap-4 sm:grid-cols-2">
+					<div>
+						<label for="start" class="block text-sm font-medium text-slate-800">Start (UTC)</label>
+						<input id="start" type="datetime-local" name="start" value={ v.DefaultStart } required class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm"/>
+					</div>
+					<div>
+						<label for="end" class="block text-sm font-medium text-slate-800">End (UTC)</label>
+						<input id="end" type="datetime-local" name="end" value={ v.DefaultEnd } required class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm"/>
+					</div>
+				</div>
+				<div class="flex flex-wrap gap-3">
+					<button type="submit" class="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow hover:bg-slate-800">
+						Fetch events
+					</button>
+					<button type="button" id="export-csv-btn" class="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-800 shadow-sm hover:bg-slate-50">
+						Export CSV
+					</button>
+				</div>
+			</form>
+			<div id="events-result" class="mt-8 min-h-[4rem] rounded-lg border border-dashed border-slate-200 bg-slate-50/50 p-4 text-sm text-slate-500">
+				Results appear here after you fetch events.
+			</div>
+		}
+	</main>
 }

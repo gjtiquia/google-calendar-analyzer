@@ -1,0 +1,18 @@
+package views
+
+templ Layout(title string, body templ.Component) {
+	<!doctype html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>{ title }</title>
+			<link rel="stylesheet" href="/assets/dist/app.css"/>
+			<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+			<script src="/assets/app.js" defer></script>
+		</head>
+		<body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+			@body
+		</body>
+	</html>
+}

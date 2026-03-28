@@ -9,10 +9,17 @@ import (
 	"time"
 
 	"github.com/gjtiquia/google-calendar-analyzer/internal/app"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	cfg := app.LoadConfigFromEnv()
+	// Load repo-root .env into the process environment (optional; ignored if missing).
+	_ = godotenv.Load()
+
+	cfg, err := app.LoadConfigFromEnv()
+	if err != nil {
+		log.Fatalf("config: %v", err)
+	}
 
 	srv := app.NewServer(cfg)
 	httpServer := &http.Server{

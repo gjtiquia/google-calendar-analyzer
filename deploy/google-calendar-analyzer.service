@@ -1,0 +1,21 @@
+[Unit]
+Description=Google Calendar Analyzer web service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/google-calendar-analyzer
+EnvironmentFile=/etc/google-calendar-analyzer.env
+ExecStart=/opt/google-calendar-analyzer/bin/google-calendar-analyzer
+Restart=on-failure
+RestartSec=5
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
