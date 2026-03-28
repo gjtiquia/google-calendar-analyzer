@@ -1,0 +1,11 @@
+{
+  "name": "google-calendar-analyzer",
+  "private": true,
+  "scripts": {
+    "css:build": "tailwindcss -i ./assets/css/input.css -o ./assets/dist/app.css --minify",
+    "css:watch": "tailwindcss -i ./assets/css/input.css -o ./assets/dist/app.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

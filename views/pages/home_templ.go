@@ -29,7 +29,7 @@ func Home() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Google Calendar Analyzer</title><link rel=\"stylesheet\" href=\"/assets/css/input.css\"></head><body><main><h1>Google Calendar Analyzer</h1><p>Phase 1 scaffold is running.</p></main></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Google Calendar Analyzer</title><link rel=\"stylesheet\" href=\"/assets/dist/app.css\"></head><body class=\"min-h-screen bg-slate-50 text-slate-900 antialiased\"><main class=\"mx-auto max-w-3xl px-6 py-10\"><h1 class=\"text-3xl font-semibold tracking-tight\">Google Calendar Analyzer</h1><p class=\"mt-2 text-slate-600\">Phase 1 scaffold is running.</p></main></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
