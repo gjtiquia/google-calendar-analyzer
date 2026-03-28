@@ -11,11 +11,11 @@ var (
 	once         sync.Once
 )
 
-// AssetVersion returns the current git commit SHA (from the working tree) for static asset cache busting.
+// AssetVersion returns the short git commit SHA (from the working tree) for static asset cache busting.
 // Resolved once on first use; falls back to "dev" if git is unavailable.
 func AssetVersion() string {
 	once.Do(func() {
-		out, err := exec.Command("git", "rev-parse", "HEAD").Output()
+		out, err := exec.Command("git", "rev-parse", "--short", "HEAD").Output()
 		if err != nil {
 			assetVersion = "dev"
 			return
