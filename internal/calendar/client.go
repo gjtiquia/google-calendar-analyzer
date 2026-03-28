@@ -50,7 +50,8 @@ func ListCalendars(ctx context.Context, accessToken string) ([]CalendarListEntry
 }
 
 // ListEventsForCalendars runs events.list per calendar with pagination.
-func ListEventsForCalendars(ctx context.Context, accessToken string, calendarIDs []string, start, end time.Time) ([]Event, error) {
+// If search is non-empty, it is sent as the API's free-text q parameter.
+func ListEventsForCalendars(ctx context.Context, accessToken string, calendarIDs []string, start, end time.Time, search string) ([]Event, error) {
 	svc, err := newService(ctx, accessToken)
 	if err != nil {
 		return nil, err
@@ -68,6 +69,9 @@ func ListEventsForCalendars(ctx context.Context, accessToken string, calendarIDs
 				TimeMin(timeMin).
 				TimeMax(timeMax).
 				MaxResults(2500)
+			if search != "" {
+				call = call.Q(search)
+			}
 			if tok != "" {
 				call = call.PageToken(tok)
 			}

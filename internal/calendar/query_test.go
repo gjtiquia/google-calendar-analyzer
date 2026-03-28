@@ -12,8 +12,7 @@ func TestParseQuery_ok(t *testing.T) {
 	v.Set("end", "2026-01-02T00:00:00Z")
 	v.Add("calendar_ids", "a@group.calendar.google.com")
 	v.Add("calendar_ids", "b@group.calendar.google.com")
-	v.Set("q", "ignored")
-	v.Set("match_mode", "ignored")
+	v.Set("q", "  standup  ")
 
 	q, err := ParseQuery(v)
 	if err != nil {
@@ -24,6 +23,9 @@ func TestParseQuery_ok(t *testing.T) {
 	}
 	if len(q.CalendarIDs) != 2 {
 		t.Fatalf("calendar ids: %v", q.CalendarIDs)
+	}
+	if q.Q != "standup" {
+		t.Fatalf("q: %q", q.Q)
 	}
 }
 

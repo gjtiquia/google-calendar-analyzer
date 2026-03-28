@@ -132,7 +132,7 @@ func (h *Handler) EventsQuery(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	events, err := calendar.ListEventsForCalendars(ctx, p.AccessToken, q.CalendarIDs, q.Start, q.End)
+	events, err := calendar.ListEventsForCalendars(ctx, p.AccessToken, q.CalendarIDs, q.Start, q.End, q.Q)
 	if err != nil {
 		h.writeEventsFragment(ctx, w, partials.Flash(friendlyAPIErr(err)))
 		return
@@ -186,7 +186,7 @@ func (h *Handler) ExportCSV(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	events, err := calendar.ListEventsForCalendars(ctx, p.AccessToken, q.CalendarIDs, q.Start, q.End)
+	events, err := calendar.ListEventsForCalendars(ctx, p.AccessToken, q.CalendarIDs, q.Start, q.End, q.Q)
 	if err != nil {
 		http.Error(w, friendlyAPIErr(err), http.StatusBadGateway)
 		return

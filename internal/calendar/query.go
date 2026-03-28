@@ -12,10 +12,11 @@ type Query struct {
 	Start       time.Time
 	End         time.Time
 	CalendarIDs []string
+	// Q is passed to the Google Calendar API events.list "q" parameter (free-text search). Empty omits it.
+	Q string
 }
 
-// ParseQuery parses start, end, and calendar IDs from form values (POST body or GET query).
-// Optional keys q and match_mode are ignored for MVP.
+// ParseQuery parses start, end, calendar IDs, and optional search string from form values (POST body or GET query).
 func ParseQuery(values url.Values) (Query, error) {
 	startRaw := strings.TrimSpace(values.Get("start"))
 	endRaw := strings.TrimSpace(values.Get("end"))
@@ -54,10 +55,13 @@ func ParseQuery(values url.Values) (Query, error) {
 		return Query{}, errors.New("select at least one calendar")
 	}
 
+	q := strings.TrimSpace(values.Get("q"))
+
 	return Query{
 		Start:       start.UTC(),
 		End:         end.UTC(),
 		CalendarIDs: out,
+		Q:           q,
 	}, nil
 }
 
