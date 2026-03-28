@@ -145,7 +145,8 @@ func (h *Handler) EventsQuery(w http.ResponseWriter, r *http.Request) {
 		h.writeEventsFragment(ctx, w, partials.EmptyState())
 		return
 	}
-	h.writeEventsFragment(ctx, w, partials.EventsTable(events))
+	summary := calendar.SummarizeEvents(events)
+	h.writeEventsFragment(ctx, w, partials.EventsResult(summary, events))
 }
 
 func calendarNameLookup(ctx context.Context, accessToken string) map[string]string {

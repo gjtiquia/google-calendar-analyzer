@@ -1,0 +1,25 @@
+package partials
+
+import "github.com/gjtiquia/google-calendar-analyzer/internal/calendar"
+
+templ EventsSummary(summary calendar.EventSummary) {
+	<div class="overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm">
+		<table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+			<caption class="sr-only">Summary for this fetch</caption>
+			<thead class="bg-slate-100 text-xs font-semibold uppercase tracking-wide text-slate-700">
+				<tr>
+					<th class="px-4 py-3">Metric</th>
+					<th class="px-4 py-3">Value</th>
+				</tr>
+			</thead>
+			<tbody class="divide-y divide-slate-100">
+				for _, row := range summaryRows(summary) {
+					<tr class="hover:bg-slate-50">
+						<td class="px-4 py-2 text-slate-900">{ row.Label }</td>
+						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ row.Value }</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+}

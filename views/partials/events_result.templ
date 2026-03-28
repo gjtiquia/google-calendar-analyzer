@@ -1,0 +1,10 @@
+package partials
+
+import "github.com/gjtiquia/google-calendar-analyzer/internal/calendar"
+
+templ EventsResult(summary calendar.EventSummary, events []calendar.Event) {
+	<div class="flex flex-col gap-8">
+		@EventsSummary(summary)
+		@EventsTable(events)
+	</div>
+}
