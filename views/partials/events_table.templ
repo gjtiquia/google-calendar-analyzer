@@ -9,6 +9,8 @@ templ EventsTable(events []calendar.Event) {
 				<tr>
 					<th class="px-4 py-3">Date</th>
 					<th class="px-4 py-3">Title</th>
+					<th class="px-4 py-3">Start time</th>
+					<th class="px-4 py-3">End time</th>
 					<th class="px-4 py-3">Duration (hrs)</th>
 					<th class="px-4 py-3">Link</th>
 				</tr>
@@ -18,6 +20,8 @@ templ EventsTable(events []calendar.Event) {
 					<tr class="hover:bg-slate-50">
 						<td class="whitespace-nowrap px-4 py-2 font-mono text-xs text-slate-700">{ calendar.FormatEventDate(e) }</td>
 						<td class="px-4 py-2 text-slate-900">{ e.Summary }</td>
+						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ calendar.FormatEventStartTime(e) }</td>
+						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ calendar.FormatEventEndTime(e) }</td>
 						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ calendar.FormatDurationHours(e) }</td>
 						<td class="px-4 py-2">
 							if e.HTMLLink != "" {

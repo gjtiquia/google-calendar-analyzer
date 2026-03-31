@@ -46,10 +46,11 @@ func TestWriteEvents_headerAndEscaping(t *testing.T) {
 	if rows[1][1] != `Title, with "quotes"` {
 		t.Fatalf("field: %q", rows[1][1])
 	}
-	if rows[1][2] != "1.00" {
-		t.Fatalf("duration: %q", rows[1][2])
+	// Times depend on test machine local TZ; compare duration and link by position.
+	if rows[1][4] != "1.00" {
+		t.Fatalf("duration: %q", rows[1][4])
 	}
-	if rows[1][3] != "https://example.com/e" {
-		t.Fatalf("link: %q", rows[1][3])
+	if rows[1][5] != "https://example.com/e" {
+		t.Fatalf("link: %q", rows[1][5])
 	}
 }

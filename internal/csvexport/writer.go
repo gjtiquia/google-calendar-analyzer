@@ -10,6 +10,8 @@ import (
 var header = []string{
 	"Date",
 	"Title",
+	"Start time",
+	"End time",
 	"Duration (hrs)",
 	"Link",
 }
@@ -28,6 +30,8 @@ func WriteEvents(w io.Writer, events []calendar.Event) error {
 		row := []string{
 			calendar.FormatEventDate(e),
 			e.Summary,
+			calendar.FormatEventStartTime(e),
+			calendar.FormatEventEndTime(e),
 			calendar.FormatDurationHours(e),
 			e.HTMLLink,
 		}
