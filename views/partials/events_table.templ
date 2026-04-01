@@ -1,8 +1,12 @@
 package partials
 
-import "github.com/gjtiquia/google-calendar-analyzer/internal/calendar"
+import (
+	"time"
 
-templ EventsTable(events []calendar.Event) {
+	"github.com/gjtiquia/google-calendar-analyzer/internal/calendar"
+)
+
+templ EventsTable(events []calendar.Event, loc *time.Location) {
 	<div class="overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm">
 		<table class="min-w-full divide-y divide-slate-200 text-left text-sm">
 			<thead class="bg-slate-100 text-xs font-semibold uppercase tracking-wide text-slate-700">
@@ -18,10 +22,10 @@ templ EventsTable(events []calendar.Event) {
 			<tbody class="divide-y divide-slate-100">
 				for _, e := range events {
 					<tr class="hover:bg-slate-50">
-						<td class="whitespace-nowrap px-4 py-2 font-mono text-xs text-slate-700">{ calendar.FormatEventDate(e) }</td>
+						<td class="whitespace-nowrap px-4 py-2 font-mono text-xs text-slate-700">{ calendar.FormatEventDate(e, loc) }</td>
 						<td class="px-4 py-2 text-slate-900">{ e.Summary }</td>
-						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ calendar.FormatEventStartTime(e) }</td>
-						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ calendar.FormatEventEndTime(e) }</td>
+						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ calendar.FormatEventStartTime(e, loc) }</td>
+						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ calendar.FormatEventEndTime(e, loc) }</td>
 						<td class="whitespace-nowrap px-4 py-2 font-mono text-sm tabular-nums text-slate-800">{ calendar.FormatDurationHours(e) }</td>
 						<td class="px-4 py-2">
 							if e.HTMLLink != "" {

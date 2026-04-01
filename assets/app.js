@@ -85,6 +85,7 @@
       params.set("start", zonedDateStartToRFC3339UTC(startVal, tz));
       params.set("end", zonedDateStartToRFC3339UTC(endVal, tz));
     }
+    params.set("tz", tz);
     return params;
   }
 
@@ -165,6 +166,7 @@
       if (!sv || !ev) return;
       detail.parameters.set("start", zonedDateStartToRFC3339UTC(sv, tz));
       detail.parameters.set("end", zonedDateStartToRFC3339UTC(ev, tz));
+      detail.parameters.set("tz", tz);
     });
 
     var exportBtn = document.getElementById("export-csv-btn");

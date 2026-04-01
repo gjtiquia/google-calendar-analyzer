@@ -8,9 +8,13 @@ package partials
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/gjtiquia/google-calendar-analyzer/internal/calendar"
+import (
+	"time"
 
-func EventsTable(events []calendar.Event) templ.Component {
+	"github.com/gjtiquia/google-calendar-analyzer/internal/calendar"
+)
+
+func EventsTable(events []calendar.Event, loc *time.Location) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -41,9 +45,9 @@ func EventsTable(events []calendar.Event) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var2 string
-			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(calendar.FormatEventDate(e))
+			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(calendar.FormatEventDate(e, loc))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/events_table.templ`, Line: 21, Col: 108}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/events_table.templ`, Line: 25, Col: 113}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 			if templ_7745c5c3_Err != nil {
@@ -56,7 +60,7 @@ func EventsTable(events []calendar.Event) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(e.Summary)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/events_table.templ`, Line: 22, Col: 54}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/events_table.templ`, Line: 26, Col: 54}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -67,9 +71,9 @@ func EventsTable(events []calendar.Event) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var4 string
-			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(calendar.FormatEventStartTime(e))
+			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(calendar.FormatEventStartTime(e, loc))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/events_table.templ`, Line: 23, Col: 126}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/events_table.templ`, Line: 27, Col: 131}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
@@ -80,9 +84,9 @@ func EventsTable(events []calendar.Event) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var5 string
-			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(calendar.FormatEventEndTime(e))
+			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(calendar.FormatEventEndTime(e, loc))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/events_table.templ`, Line: 24, Col: 124}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/events_table.templ`, Line: 28, Col: 129}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -95,7 +99,7 @@ func EventsTable(events []calendar.Event) templ.Component {
 			var templ_7745c5c3_Var6 string
 			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(calendar.FormatDurationHours(e))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/events_table.templ`, Line: 25, Col: 125}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/events_table.templ`, Line: 29, Col: 125}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 			if templ_7745c5c3_Err != nil {
@@ -113,7 +117,7 @@ func EventsTable(events []calendar.Event) templ.Component {
 				var templ_7745c5c3_Var7 templ.SafeURL
 				templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(e.HTMLLink))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/events_table.templ`, Line: 28, Col: 43}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/partials/events_table.templ`, Line: 32, Col: 43}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 				if templ_7745c5c3_Err != nil {

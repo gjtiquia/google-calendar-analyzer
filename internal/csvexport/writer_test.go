@@ -25,7 +25,7 @@ func TestWriteEvents_headerAndEscaping(t *testing.T) {
 		},
 	}
 	var buf bytes.Buffer
-	if err := WriteEvents(&buf, events); err != nil {
+	if err := WriteEvents(&buf, events, time.UTC); err != nil {
 		t.Fatal(err)
 	}
 	s := buf.String()
@@ -46,7 +46,7 @@ func TestWriteEvents_headerAndEscaping(t *testing.T) {
 	if rows[1][1] != `Title, with "quotes"` {
 		t.Fatalf("field: %q", rows[1][1])
 	}
-	// Times depend on test machine local TZ; compare duration and link by position.
+	// Times formatted in UTC for stable assertions.
 	if rows[1][4] != "1.00" {
 		t.Fatalf("duration: %q", rows[1][4])
 	}

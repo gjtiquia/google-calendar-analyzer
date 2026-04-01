@@ -27,6 +27,25 @@ func TestParseQuery_ok(t *testing.T) {
 	if q.Q != "standup" {
 		t.Fatalf("q: %q", q.Q)
 	}
+	if q.Location != time.UTC {
+		t.Fatalf("location without tz: want UTC, got %v", q.Location)
+	}
+}
+
+func TestParseQuery_displayTimezone(t *testing.T) {
+	v := url.Values{}
+	v.Set("start", "2026-01-01T00:00:00Z")
+	v.Set("end", "2026-01-02T00:00:00Z")
+	v.Set("calendar_ids", "x")
+	v.Set("tz", "America/New_York")
+
+	q, err := ParseQuery(v)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if q.Location.String() != "America/New_York" {
+		t.Fatalf("location: %v", q.Location)
+	}
 }
 
 func TestParseQuery_startNotBeforeEnd(t *testing.T) {

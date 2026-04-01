@@ -14,6 +14,8 @@ type Query struct {
 	CalendarIDs []string
 	// Q is passed to the Google Calendar API events.list "q" parameter (free-text search). Empty omits it.
 	Q string
+	// Location is the IANA timezone used to format event dates/times for display (from client "tz"). Never nil.
+	Location *time.Location
 }
 
 // ParseQuery parses start, end, calendar IDs, and optional search string from form values (POST body or GET query).
@@ -57,12 +59,28 @@ func ParseQuery(values url.Values) (Query, error) {
 
 	q := strings.TrimSpace(values.Get("q"))
 
+	loc := loadDisplayLocation(values.Get("tz"))
+
 	return Query{
 		Start:       start.UTC(),
 		End:         end.UTC(),
 		CalendarIDs: out,
 		Q:           q,
+		Location:    loc,
 	}, nil
+}
+
+// loadDisplayLocation parses an IANA timezone name for formatting. Empty or invalid falls back to UTC.
+func loadDisplayLocation(tz string) *time.Location {
+	tz = strings.TrimSpace(tz)
+	if tz == "" {
+		return time.UTC
+	}
+	loc, err := time.LoadLocation(tz)
+	if err != nil {
+		return time.UTC
+	}
+	return loc
 }
 
 func parseDateTime(s string) (time.Time, error) {
