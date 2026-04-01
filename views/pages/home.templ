@@ -65,13 +65,20 @@ templ homeBody(v viewdata.HomeView) {
 				@partials.CalendarList(v.Calendars)
 				<div class="grid gap-4 sm:grid-cols-2">
 					<div>
-						<label for="start" class="block text-sm font-medium text-slate-800">Start (UTC)</label>
+						<label for="start" class="block text-sm font-medium text-slate-800">Start date</label>
 						<input id="start" type="date" name="start" value={ v.DefaultStart } required class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm"/>
 					</div>
 					<div>
-						<label for="end" class="block text-sm font-medium text-slate-800">End (UTC)</label>
+						<label for="end" class="block text-sm font-medium text-slate-800">End date</label>
 						<input id="end" type="date" name="end" value={ v.DefaultEnd } required class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm"/>
 					</div>
+				</div>
+				<div>
+					<label for="tz" class="block text-sm font-medium text-slate-800">Timezone</label>
+					<select id="tz" class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm">
+						<option value="UTC">UTC</option>
+					</select>
+					<p class="mt-1 text-xs text-slate-500">Used to interpret start/end dates. Requests send UTC to the server.</p>
 				</div>
 				<div>
 					<label for="q" class="block text-sm font-medium text-slate-800">Search</label>
